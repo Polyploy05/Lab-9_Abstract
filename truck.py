@@ -17,9 +17,11 @@ class Truck(Vehicle):
       return f"{self.name} did not have enough energy and moved 1 space."
 
 
+    #Deducts energy
     self._energy -= 20
 
 
+    #Calculates distance
     distance = (2 * self.speed) + random.randint(-1,1)
     start = self.location 
     target = start + distance
