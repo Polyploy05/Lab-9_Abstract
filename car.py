@@ -1,7 +1,7 @@
 '''
-Name:
-Date:
-Group:
+Name: Daniel Puerto & Jacob Miranda
+Date: 3/17/26
+Group: 13
 Description:
 '''
 
