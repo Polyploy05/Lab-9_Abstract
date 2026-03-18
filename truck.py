@@ -26,7 +26,7 @@ class Truck(Vehicle):
     start = self.location 
     target = start + distance
 
-
+    #Truck hits obstacle
     if obs_loc is not None and obs_loc <= target:
 
       self._location = target 
