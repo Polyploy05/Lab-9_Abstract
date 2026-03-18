@@ -10,6 +10,8 @@ import random
 
 class Truck(Vehicle):
 
+  #Creates special move
+
   def special_move(self, obs_loc):
 
     if self.energy < 20:
