@@ -15,19 +15,27 @@ class Vehicle:
         self._position = 0
         self._energy = 100
 
-    def fast(self):
+    def fast(self, obs_loc):
         if self._energy >= 5:
             self._energy -= 5
             movement = random.randint(-1, 1) + self._speed
-            self._position += movement
-            return movement
         else:
-            self.slow()
+            return self.slow(obs_loc)
+        
+        self._position += movement
+        if obs_loc is not None and self._position >= obs_loc:
+            self._position = obs_loc
+            return f"{self._name} sped through {movement} spaces but CRASHED into an obstacle at {obs_loc}!"
+        else:
+            return f"{self._name} sped through {movement} spaces."
 
-    def slow(self):
+    def slow(self, obs_loc):
         movement = random.randint(-1, 1) + (self._speed // 2)
         self._position += movement
-        return movement
+        if movement > obs_loc:
+            return f"{self._name} moved forward {movement} spaces and drove around the obstacle at {obs_loc}!"
+        else:
+            return f"{self._name} moved forward {movement} spaces"
     
     def __str__(self):
         return f"{self.name()} (Energy: {self.energy()}, Position: {self.position()})"
