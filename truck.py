@@ -2,7 +2,7 @@
 Name: Daniel Puerto & Jacob Miranda
 Date: 3/17/26
 Group: 13
-Desc:
+Desc: Creates class for truck and the special move 
 '''
 
 import vehicle
