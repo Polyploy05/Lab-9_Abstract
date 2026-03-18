@@ -2,7 +2,7 @@
 Name: Daniel Puerto & Jacob Miranda
 Date: 3/17/26
 Group: 13
-Description:
+Description: Creates the motorcycle Class, slow function for specifically the motorcycle and the special move.
 
 '''
 
@@ -12,11 +12,12 @@ import random
 
 class Motorcycle(Vehicle):
 
+  #Slow function that calculates the speed/distance 
   def slow(self, obs_loc):
     base = int(self.speed * 0.75)
     distance = base + random.randint(-1,1)
     if distance < 1:
-      distance = 
+      distance = 1
 
     target = self._location + distance 
 
