@@ -5,6 +5,7 @@ Description:
 '''
 
 import check_input
+import random
 import vehicle
 import car
 import motorcycle
@@ -18,7 +19,7 @@ def place_obstacle(track):
         placed = 0
         while placed < 2:
             pos = random.randint(1, len(lane) -2)
-            if lane[pos] == "-"
+            if lane[pos] == "-":
                 lane[pos] =="#"
                 placed += 1
 
@@ -26,7 +27,7 @@ def place_obstacle(track):
 def find_next_obstacle(lane, start_pos):
 
     try:
-        return lnae.index("#", start_pos):
+        return lane.index("#", start_pos)
     except ValueError:
         return 9999
 
@@ -46,7 +47,7 @@ def main():
         ["T"] + ["-"] * 99
     ]
 
-    place_obstacles(track)
+    place_obstacle(track)
 
     print_track(track)
 
@@ -54,32 +55,31 @@ def main():
     print("Would you like to be car, motorcycle, or truck?")
     choice = check_input.get_int_range("Enter 1 for car, 2 for motorcycle, or 3 for truck: ", 1, 3)
     if choice == 1:
-        player = Car("Car",  10)
+        player = car.Car("Car", "P",  10)
         player_lane = 0
     elif choice == 2:
-        player = Motorcycle("Motorcycle",  15)
+        player = motorcycle.Motorcycle("Motorcycle", "P",  15)
         player_lane = 1
     else:
-        player = Truck("Truck", 5)
+        player = truck.Truck("Truck", "P", 5)
         player_lane = 2
 
     #Marked as the player
-    track[player_lane][0] = "P"
+    track[player_lane][0] = player.initial()
 
     #Creates opponents
     vehicles = [None, None, None]
     vehicles[player_lane] = player
 
     if player_lane != 0:
-        vehicles[0] = Car("Car", 10)
+        vehicles[0] = car.Car("Car", "C", 10)
     if player_lane != 1:
-        vehicles[1] = Motorcycle("Motorcycle", 15)
+        vehicles[1] = motorcycle.Motorcycle("Motorcycle", "M", 15)
     if player_lane != 2:
-        vehicles[2] = Truck("Truck", 5)
+        vehicles[2] = truck.Truck("Truck", "T", 5)
 
     #Opponent initlas
-    initials = ["C", "M", "T"]
-    initials[player_lane] = "P"
+    initials = [vehicle.initial() for vehicle in vehicles]
 
     #Finish Order
     finish_order = []
@@ -99,7 +99,7 @@ def main():
             move_choice = check_input.get_int_range("Enter choice (1-3): ", 1, 3)
 
             lane = track[player_lane]
-            obs = find_next_obstacle(lane,player.location)
+            obs = find_next_obstacle(lane,player.position())
 
             if move_choice == 1:
                 print(player.fast(obs))
@@ -109,17 +109,17 @@ def main():
                 print(player.special_move(obs))
 
         #Opponent moves
-        for lane_index, racer in enumerate(vehicle):
+        for lane_index, racer in enumerate(vehicles):
             if racer is None or racer in finish_order:
                 continue
             if racer is player:
                 continue
 
             lane = track[lane_index]
-            obs = find_next_obstacle(lane, racer.location)
+            obs = find_next_obstacle(lane, racer.position())
 
             roll = random.random()
-            if racer.energy <= 0:
+            if racer.energy() <= 0:
                 result = racer.slow(obs)
             elif roll < 0.4:
                 result = racer.slow(obs)
@@ -143,14 +143,14 @@ def main():
                     lane[i] = "*"
 
             #Out of bounds 
-            if racer.location >= len(lane):
-                racer._location = len(lane) - 1
+            if racer.position() >= len(lane):
+                racer._position = len(lane) - 1
 
             #Replace old initial
-            lane[racer.location] = initials[lane_index]
+            lane[racer.position()] = initials[lane_index]
 
             #Checks finish 
-            if racer.location == len(lane) - 1 and racer not in  finish_order:
+            if racer.position() == len(lane) - 1 and racer not in  finish_order:
                 finish_order.append(racer)
 
     #Resuslts
@@ -159,10 +159,7 @@ def main():
         print(f"{i}. {racer.name}")
         
 
-
-
     
 
 if __name__ == "__main__":
     main()
-
