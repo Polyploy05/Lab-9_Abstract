@@ -13,7 +13,7 @@ import truck
 
 
 
-def place_obstacle(track):
+def place_obstacles(track):
 
     for lane in track:
         placed = 0
@@ -47,7 +47,7 @@ def main():
         ["T"] + ["-"] * 99
     ]
 
-    place_obstacle(track)
+    place_obstacles(track)
 
     print_track(track)
 
