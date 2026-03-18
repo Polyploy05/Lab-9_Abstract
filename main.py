@@ -1,7 +1,7 @@
 '''Name: Jacob Miranda & Daniel Puerto
 Date: 03/16/26
 Group: 13
-Description:
+Description: Creates the track, players, and opponents. Loops the game and places obstacles
 '''
 
 import check_input
