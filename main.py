@@ -42,6 +42,7 @@ def print_track(track):
 
 def main():
 
+    #Creates the track
     track = [
         ["C"] + ["-"] * 99,
         ["M"] + ["-"] * 99,
@@ -53,6 +54,7 @@ def main():
     print_track(track)
 
 
+    #Prompts player who they want to play as
     print("Would you like to be car, motorcycle, or truck?")
     choice = check_input.get_int_range("Enter 1 for car, 2 for motorcycle, or 3 for truck: ", 1, 3)
     if choice == 1:
