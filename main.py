@@ -27,7 +27,7 @@ def place_obstacle(track):
 def find_next_obstacle(lane, start_pos):
 
     try:
-        return lane.index("#", start_pos)
+        return lane.index("#", start_pos + 1)
     except ValueError:
         return 9999
 
